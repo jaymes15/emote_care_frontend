@@ -1,0 +1,39 @@
+.signup_background{
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.signup_form{
+    width: 50%;
+    margin-top: 80px;
+}
+
+.header{
+    padding-top: 50px;
+    font-family: "Roboto";
+    font-size: 30px;
+}
+
+.signup-btn{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.signup-error-message{
+    margin-bottom: 30px;
+    color: red;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .signup_form{
+        width: 90%;
+        margin-top: 80px;
+    }
+
+    .header{
+        padding-top: 50px;
+        font-family: "Roboto";
+        font-size: 20px;
+    }
+}
