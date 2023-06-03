@@ -27,7 +27,7 @@ function Home() {
         window.location.assign(LoginRoute);
     }
 
-   
+
 
     const fetchUserDetailsHandler = useCallback(async () => {
         setIsLoading(true);
@@ -41,6 +41,7 @@ function Home() {
                 }
             });
             const data = await response.json();
+    
             if (!response.ok) {
                 throw new Error(data);
             }
@@ -98,7 +99,7 @@ function Home() {
         content = allUserDetails.map((user) => (
 
 
-            <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+            <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3" key={user.id}>
                 <a href="#">
 
 
@@ -107,9 +108,9 @@ function Home() {
 
                         <img
                             alt="Placeholder"
-                            className="block h-auto w-full"
+                            className="users-pictures block h-auto w-full"
                             src={user.profile_picture ? user.profile_picture : defaultProfilePicture}
-                            style={{ height: "300px" }} />
+                             />
 
 
 
@@ -140,22 +141,20 @@ function Home() {
             {isLoading && <center><h3> Loading... </h3></center>}
             {isError && <center><h3> {error} </h3></center>}
             {!isLoading && !isError &&
-                // <>
-                //     <center>
-                //         <h3>Welcome {userDetails.username}</h3>
-                //         <br /><br />
-                //         <div>
-                //             {content}
-                //         </div>
-                //     </center>
-                // </>
+               
                 <>
-                    <NavBar/>
+                    <NavBar />
 
-                   
+
 
                     <div className="container my-12 mx-auto px-4 md:px-12">
-                        <h3 className='welcome_text text-4xl'>Welcome {userDetails.username}</h3>
+                        <h3 className='welcome_text text-3xl'>
+                        <img className="w-20 h-20 rounded-full" 
+                            src={userDetails.profilePicture ? userDetails.profilePicture : defaultProfilePicture}
+                             alt="Rounded avatar"/>
+                             <br/>Welcome {userDetails.username}
+                            
+                        </h3>
                         <div className="flex flex-wrap -mx-1 lg:-mx-4">
 
 

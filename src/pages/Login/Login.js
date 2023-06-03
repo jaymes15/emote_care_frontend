@@ -10,6 +10,7 @@ function Login() {
         username: "",
         password: ""
     });
+    const [isError, setIsError] = useState(false);
     const [error, setError] = useState("");
     const usernameField = "username"
     const passwordField = "password"
@@ -44,8 +45,7 @@ function Login() {
         let res = await response.json()
         if (!response.ok) {
             let error = res;
-            console.log("error")
-            console.log(error)
+          
 
             if (error.username) {
                 throw new Error(error.username);
@@ -75,6 +75,7 @@ function Login() {
             await getUserAccessAndRefreshToken();
 
         } catch (error) {
+            setIsError(true);
             setError(error.message);
 
         }
@@ -86,7 +87,7 @@ function Login() {
                 <h3 className='header text-amber-500'>Login To Emote Care Chat App</h3>
 
                 <form onSubmit={submitHandler} className="login_form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <h3 className='signup-error-message'>{error}</h3>
+                    {isError && <h3 className='signup-error-message'>{error}</h3>}
 
                     <div>
                         <label htmlFor={usernameField} className="block text-gray-700 text-sm font-bold mb-2">Username</label>

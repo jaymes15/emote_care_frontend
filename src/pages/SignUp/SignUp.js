@@ -11,6 +11,7 @@ function SignUp() {
         confirmPassword: "",
         password: ""
     });
+    const [isError, setIsError] = useState(false);
     const [error, setError] = useState("");
     const usernameField = "username"
     const passwordField = "password"
@@ -91,7 +92,7 @@ function SignUp() {
                     password: userDetails.confirmPassword
                 })
             });
-            console.log(response.body)
+
             if (!response.ok) {
                 let error = await response.json()
 
@@ -110,6 +111,7 @@ function SignUp() {
 
 
         } catch (error) {
+            setIsError(true);
             setError(error.message);
 
         }
@@ -121,7 +123,7 @@ function SignUp() {
                 <h3 className='header text-amber-500'>Sign Up To emote Care Chat App</h3>
 
                 <form onSubmit={submitHandler} className="signup_form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <h3 className='signup-error-message'>{error}</h3>
+                    {isError && <h3 className='signup-error-message'>{error}</h3>}
 
                     <div className='mb-4'>
                         <label htmlFor={usernameField} className="block text-gray-700 text-sm font-bold mb-2">Username</label>

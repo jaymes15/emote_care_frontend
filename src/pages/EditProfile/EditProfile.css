@@ -14,18 +14,14 @@
     font-size: 30px;
 }
 
-.login-btn{
+.editprofile-btn{
     width: 100%;
     margin-bottom: 30px;
 }
 
-.login-error-message{
+.editprofile-error-message{
     margin-bottom: 30px;
     color: red;
-}
-
-label{
-    text-align: left;
 }
 
 /* Extra small devices (phones, 600px and down) */
