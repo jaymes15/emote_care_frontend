@@ -47,9 +47,9 @@ function ChatRoom() {
             }
 
 
-            let obj = data.find(otherUser => otherUser.sender.username === param.otherUsername);
+            // let obj = data.find(otherUser => otherUser.sender.username === param.otherUsername);
 
-            setotherUserDp(`http://localhost:8000${obj.sender.profile_picture}`)
+            // setotherUserDp(`http://localhost:8000${obj.sender.profile_picture}`)
             a.push(data);
             setAllMessages(data);
 
@@ -117,19 +117,29 @@ function ChatRoom() {
    
         if (allMessages.length > 0) {
             content = allMessages.map((messages) => (
+                
 
 
                 <>
-                    {messages.sender.username === param.otherUsername && <div className="chat-message">
+                    {console.log("AAA")}
+                    {console.log(messages.is_bot)}
+                    {messages.is_bot !== true && messages.sender.username === param.otherUsername && <div className="chat-message">
 
                         <div className="user-message" style={{width: "30px"}}>
                             {messages.text}
                         </div>
                     </div>}
 
-                    {messages.sender.username !== param.otherUsername && <div className="chat-message">
+                    {messages.is_bot !== true && messages.sender.username !== param.otherUsername && <div className="chat-message">
 
                         <div className="bot-message">
+                            {messages.text}
+                        </div>
+                    </div>}
+                    
+                    {messages.is_bot === true && <div className="chat-message">
+
+                        <div className="bot-message" style={{backgroundColor: "yellow", marginRight: "10%"}}>
                             {messages.text}
                         </div>
                     </div>}
@@ -184,19 +194,7 @@ function ChatRoom() {
                         {content}
                         
                         
-                        {/* {lastMessage?.username === param.otherUsername && <div className="chat-message">
-
-                            <div className="user-message">
-                                {lastMessage?.text}
-                            </div>
-                        </div>}
-
-                        {lastMessage?.username !== param.otherUsername && <div className="chat-message">
-
-                            <div className="bot-message">
-                                {lastMessage?.text}
-                            </div>
-                        </div>} */}
+                  
              
 
                     <form onSubmit={sendMessageHandler} className="chat-textfield ">
