@@ -1,0 +1,115 @@
+.chat_bar {
+    margin-left: 10%;
+    margin-top: 30px;
+}
+
+.chat_bar .otherUsername {
+    position: relative;
+    top: 18px;
+    left: 30px;
+}
+
+.chat-container {
+    max-width: 50%;
+    margin: 0 auto;
+    margin-top: 7%;
+  
+   
+}
+
+.chat-message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+
+.user-message {
+    background-color: #75dab4;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    flex: 1;
+    position: relative;
+    right: 10%;
+}
+
+.bot-message {
+    background-color: #e2e8f0;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    flex: 1;
+    position: relative;
+    left: 10%;
+}
+
+.chat-textfield {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #e2e8f0;
+    padding: 1rem;
+  }
+
+  .chat-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #f0f0f0;
+  }
+
+  .chat-send-button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #75dab4;
+    color: white;
+    cursor: pointer;
+  }
+
+/* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    .user-message {
+        background-color: #75dab4;
+        color: white;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        flex: 1;
+        position: relative;
+        right: 30%;
+    }
+    
+    .bot-message {
+        background-color: #e2e8f0;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        flex: 1;
+        position: relative;
+        left: 30%;
+    }
+
+    .chat-input {
+        flex: 1;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: #f0f0f0;
+        position: relative;
+        right:70px;
+        
+      }
+    
+      .chat-send-button {
+        
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: #75dab4;
+        color: white;
+        cursor: pointer;
+        position: relative;
+        right:70px;
+        
+      }
+} 

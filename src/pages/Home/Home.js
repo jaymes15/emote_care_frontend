@@ -6,6 +6,7 @@ import "./Home.css";
 import NavBar from '../../components/NavBar';
 
 import { LoginRoute } from '../../constants';
+import { Link } from "react-router-dom";
 
 function Home() {
 
@@ -100,7 +101,7 @@ function Home() {
 
 
             <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3" key={user.id}>
-                <a href="#">
+                <Link to={`chat_room/${user.username}`}>
 
 
                     <article className="overflow-hidden rounded-lg shadow-lg">
@@ -125,7 +126,7 @@ function Home() {
                         </footer>
 
                     </article>
-                </a>
+                </Link>
 
             </div>
 
@@ -133,7 +134,7 @@ function Home() {
         ));
     }
     else {
-        content = <p>Found no research communities.</p>;
+        content = <p>Found no Users.</p>;
     }
 
     return (
