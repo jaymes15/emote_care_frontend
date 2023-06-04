@@ -18,10 +18,10 @@ function ChatRoom() {
     const [otherUserDp, setotherUserDp] = useState("");
     const [sendMyMessage, setSendMyMessage] = useState("");
 
-    var websocket = websocket = new WebSocket(
+    var websocket = new WebSocket(
         `ws://0.0.0.0:8000/ws/chat/${param.otherUsername}/?token=${userToken}`
     );
-    var a = []
+    var listOfMessages = []
 
 
 
@@ -47,10 +47,17 @@ function ChatRoom() {
             }
 
 
-            // let obj = data.find(otherUser => otherUser.sender.username === param.otherUsername);
+            let obj = data.find(otherUser => otherUser.sender.username === param.otherUsername);
 
-            // setotherUserDp(`http://localhost:8000${obj.sender.profile_picture}`)
-            a.push(data);
+            if (obj && obj.sender.profile_picture) {
+                setotherUserDp(`http://localhost:8000${obj.sender.profile_picture}`)
+            }
+
+            
+            data.reverse()
+
+
+            listOfMessages.push(data);
             setAllMessages(data);
 
 
@@ -72,21 +79,18 @@ function ChatRoom() {
 
         websocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            console.log("MMM")
-            console.log(a)
-            console.log(data)
-            // setAllMessages({data});
-            a[0].push({
+          
+            listOfMessages[0].push({
                 sender: {
                     username: data.username
                 },
                 text: data.text
             });
             setLastMessage(data);
-            c()
-              
+            updateUI()
+
         }
-        
+
 
         websocket.onerror = (event) => {
             console.log("Something went wrong");
@@ -101,31 +105,30 @@ function ChatRoom() {
     useEffect(() => {
         fetchMessagesHandler();
         webSocketHandler();
-        return () => {} 
+        return () => { }
 
     }, []);
 
     let content = <p></p>;
 
 
-    const c = () => {
-        console.log(a[0])
-        setAllMessages(a[0]);
+    const updateUI = () => {
+
+        setAllMessages(listOfMessages[0]);
         setContent()
     }
     const setContent = () => {
-   
+
         if (allMessages.length > 0) {
             content = allMessages.map((messages) => (
-                
+
 
 
                 <>
-                    {console.log("AAA")}
-                    {console.log(messages.is_bot)}
+
                     {messages.is_bot !== true && messages.sender.username === param.otherUsername && <div className="chat-message">
 
-                        <div className="user-message" style={{width: "30px"}}>
+                        <div className="user-message" style={{ width: "30px" }}>
                             {messages.text}
                         </div>
                     </div>}
@@ -136,10 +139,10 @@ function ChatRoom() {
                             {messages.text}
                         </div>
                     </div>}
-                    
+
                     {messages.is_bot === true && <div className="chat-message">
 
-                        <div className="bot-message" style={{backgroundColor: "yellow", marginRight: "10%"}}>
+                        <div className="bot-message" style={{ backgroundColor: "yellow", marginRight: "10%" }}>
                             {messages.text}
                         </div>
                     </div>}
@@ -158,7 +161,7 @@ function ChatRoom() {
         event.preventDefault();
 
         websocket.send(sendMyMessage);
-       
+
         setSendMyMessage("");
 
     }
@@ -188,31 +191,31 @@ function ChatRoom() {
                 </h3>
 
             </div>
-            
-                <div className="chat-container" >
-                   
-                        {content}
-                        
-                        
-                  
-             
 
-                    <form onSubmit={sendMessageHandler} className="chat-textfield ">
-                        <input
-                            type="text"
-                            className="chat-input"
-                            placeholder="Type your message"
-                            onChange={onChangeHandler}
-                            value={sendMyMessage}
+            <div className="chat-container" >
 
-                            required />
-                        <button class="chat-send-button">Send</button>
-
-                    </form>
+                {content}
 
 
 
-                </div>
+
+
+                <form onSubmit={sendMessageHandler} className="chat-textfield ">
+                    <input
+                        type="text"
+                        className="chat-input"
+                        placeholder="Type your message"
+                        onChange={onChangeHandler}
+                        value={sendMyMessage}
+
+                        required />
+                    <button class="chat-send-button">Send</button>
+
+                </form>
+
+
+
+            </div>
 
 
 
