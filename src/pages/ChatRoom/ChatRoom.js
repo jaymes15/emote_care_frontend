@@ -21,6 +21,7 @@ function ChatRoom() {
     var websocket = websocket = new WebSocket(
         `ws://0.0.0.0:8000/ws/chat/${param.otherUsername}/?token=${userToken}`
     );
+    var a = []
 
 
 
@@ -49,7 +50,7 @@ function ChatRoom() {
             let obj = data.find(otherUser => otherUser.sender.username === param.otherUsername);
 
             setotherUserDp(`http://localhost:8000${obj.sender.profile_picture}`)
-
+            a.push(data);
             setAllMessages(data);
 
 
@@ -71,8 +72,18 @@ function ChatRoom() {
 
         websocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            setAllMessages({data})
-            // setLastMessage(data);
+            console.log("MMM")
+            console.log(a)
+            console.log(data)
+            // setAllMessages({data});
+            a[0].push({
+                sender: {
+                    username: data.username
+                },
+                text: data.text
+            });
+            setLastMessage(data);
+            c()
               
         }
         
@@ -97,7 +108,11 @@ function ChatRoom() {
     let content = <p></p>;
 
 
-
+    const c = () => {
+        console.log(a[0])
+        setAllMessages(a[0]);
+        setContent()
+    }
     const setContent = () => {
    
         if (allMessages.length > 0) {
@@ -133,10 +148,7 @@ function ChatRoom() {
         event.preventDefault();
 
         websocket.send(sendMyMessage);
-        setLastMessage({
-            username: "",
-            text: sendMyMessage
-        });
+       
         setSendMyMessage("");
 
     }
@@ -177,9 +189,9 @@ function ChatRoom() {
                             <div className="user-message">
                                 {lastMessage?.text}
                             </div>
-                        </div>} */}
+                        </div>}
 
-                        {/* {lastMessage?.username !== param.otherUsername && <div className="chat-message">
+                        {lastMessage?.username !== param.otherUsername && <div className="chat-message">
 
                             <div className="bot-message">
                                 {lastMessage?.text}
