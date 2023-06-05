@@ -53,8 +53,8 @@ function ChatRoom() {
                 setotherUserDp(`http://localhost:8000${obj.sender.profile_picture}`)
             }
 
-            
-            data.reverse()
+
+            // data.reverse()
 
 
             listOfMessages.push(data);
@@ -79,7 +79,7 @@ function ChatRoom() {
 
         websocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-          
+
             listOfMessages[0].push({
                 sender: {
                     username: data.username
