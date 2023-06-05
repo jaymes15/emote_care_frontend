@@ -111,7 +111,8 @@ function Home() {
                             alt="Placeholder"
                             className="users-pictures block h-auto w-full"
                             src={user.profile_picture ? user.profile_picture : defaultProfilePicture}
-                             />
+                            loading="lazy"
+                        />
 
 
 
