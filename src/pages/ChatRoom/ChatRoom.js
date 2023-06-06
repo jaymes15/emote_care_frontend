@@ -2,10 +2,12 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect, useCallback } from 'react';
 import getAccessToken from "../../utils/get_access_token";
 import { LoginRoute } from "../../constants";
-import {webSocketUrl, buildAPIUrl, baseUrl} from "../../services/UrlBuilder";
+
 import NavBar from "../../components/NavBar";
 import "./Chat.css";
 import defaultProfilePicture from "../../assets/default_profile_picture.jpeg";
+import { webSocketUrl, baseUrl} from "../../services/Url";
+import buildAPIUrl from "../../services/UrlBuilder";
 
 function ChatRoom() {
     let param = useParams();
@@ -210,7 +212,7 @@ function ChatRoom() {
                         value={sendMyMessage}
 
                         required />
-                    <button class="chat-send-button">Send</button>
+                    <button className="chat-send-button">Send</button>
 
                 </form>
 
