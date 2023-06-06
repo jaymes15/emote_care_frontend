@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect, useCallback } from 'react';
 import getAccessToken from "../../utils/get_access_token";
 import { LoginRoute } from "../../constants";
-import buildAPIUrl from "../../services/UrlBuilder";
+import {webSocketUrl, buildAPIUrl, baseUrl} from "../../services/UrlBuilder";
 import NavBar from "../../components/NavBar";
 import "./Chat.css";
 import defaultProfilePicture from "../../assets/default_profile_picture.jpeg";
@@ -19,7 +19,7 @@ function ChatRoom() {
     const [sendMyMessage, setSendMyMessage] = useState("");
 
     var websocket = new WebSocket(
-        `ws://0.0.0.0:8000/ws/chat/${param.otherUsername}/?token=${userToken}`
+        `ws://${webSocketUrl()}/ws/chat/${param.otherUsername}/?token=${userToken}`
     );
     var listOfMessages = []
 
@@ -50,7 +50,8 @@ function ChatRoom() {
             let obj = data.find(otherUser => otherUser.sender.username === param.otherUsername);
 
             if (obj && obj.sender.profile_picture) {
-                setotherUserDp(`http://localhost:8000${obj.sender.profile_picture}`)
+                let url = baseUrl()
+                setotherUserDp(`http://${url}${obj.sender.profile_picture}`)
             }
 
 
