@@ -34,7 +34,7 @@ function NavBar() {
                             <Link to={EditProfileRoute} className="block py-2 pl-3 pr-4  rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Edit Profile</Link>
                         </li>
                         <li>
-                            <a href="#" onClick={logOutHandler} className="block py-2 pl-3 pr-4   rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Logout</a>
+                            <a onClick={logOutHandler} className="block py-2 pl-3 pr-4   rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Logout</a>
                         </li>
 
                     </ul>
