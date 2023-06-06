@@ -84,7 +84,7 @@ function Login() {
     return (
         <div className='login_background bg-orange-100'>
             <center>
-                <h3 className='header text-amber-500'>Login To Emote Care Chat App</h3>
+                <h3 className='header text-amber-500'>Login To Chat App</h3>
 
                 <form onSubmit={submitHandler} className="login_form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     {isError && <h3 className='signup-error-message'>{error}</h3>}
