@@ -144,6 +144,7 @@ function SignUp() {
                             value={userDetails.username}
                             onChange={onChangeHandler}
                             required
+                            disabled={isLoading? "disabled": ""}
                             className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
@@ -158,6 +159,7 @@ function SignUp() {
                             value={userDetails.password}
                             onChange={onChangeHandler}
                             required
+                            disabled={isLoading? "disabled": ""}
                             className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
@@ -172,6 +174,7 @@ function SignUp() {
                             value={userDetails.confirmPassword}
                             onChange={onChangeHandler}
                             required
+                            disabled={isLoading? "disabled": ""}
                             className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
@@ -184,9 +187,10 @@ function SignUp() {
                             Sign Up
                     </button>
                     <br/>
-                    <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" to={LoginRoute}>
+                    {!isLoading && <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" to={LoginRoute}>
                         Login
-                    </Link>
+                    </Link>}
+                    {isLoading && <h3>Sending...</h3>}
                 </form>
 
                 <br /><br />

@@ -102,6 +102,7 @@ function Login() {
                             value={userDetails.username}
                             onChange={onChangeHandler}
                             required
+                            disabled={isLoading? "disabled": ""}
                             className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
@@ -116,6 +117,7 @@ function Login() {
                             value={userDetails.password}
                             onChange={onChangeHandler}
                             required
+                            disabled={isLoading? "disabled": ""}
                             className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
@@ -126,11 +128,13 @@ function Login() {
                         Login
                     </button>
                     <br/>
-                    <Link 
+                    {!isLoading &&<Link 
                     className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
                     to={signUpRoute}>
                         Sign Up 
-                    </Link>
+                    </Link>}
+
+                    {isLoading && <h3>Sending...</h3>}
 
                 </form>
                 
