@@ -9,7 +9,7 @@ function NavBar() {
 
     const logOutHandler = () => {
         removeTokensFromLocalStorage()
-        window.location.assign(LoginRoute);
+        window.location.assign("/");
 
     }
 
