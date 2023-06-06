@@ -21,7 +21,7 @@ function ChatRoom() {
     const [sendMyMessage, setSendMyMessage] = useState("");
 
     var websocket = new WebSocket(
-        `ws://${webSocketUrl()}/ws/chat/${param.otherUsername}/?token=${userToken}`
+        `${webSocketUrl()}/ws/chat/${param.otherUsername}/?token=${userToken}`
     );
     var listOfMessages = []
 
