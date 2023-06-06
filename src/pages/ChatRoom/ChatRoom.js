@@ -51,8 +51,11 @@ function ChatRoom() {
 
 
             let obj = data.find(otherUser => otherUser.sender.username === param.otherUsername);
-
-            if (obj && obj.sender.profile_picture) {
+            
+            if (obj && obj.sender.profile_picture && obj.sender.profile_picture.includes("https:")) {
+                setotherUserDp(obj.sender.profile_picture);
+            }
+            else if (obj && obj.sender.profile_picture) {
                 let url = baseUrl()
                 setotherUserDp(`http://${url}${obj.sender.profile_picture}`)
             }
