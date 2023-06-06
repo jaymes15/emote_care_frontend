@@ -58,7 +58,9 @@ function SignUp() {
                 throw new Error(error.username);
             } else if (error.password) {
                 throw new Error(error.password);
-            } else {
+            } else if(error.non_field_errors){
+                throw new Error(error.non_field_errors[0]);
+            }else {
                 throw new Error(error);
             }
 
