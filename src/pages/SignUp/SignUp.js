@@ -12,6 +12,7 @@ function SignUp() {
         password: ""
     });
     const [isError, setIsError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
     const usernameField = "username"
     const passwordField = "password"
@@ -38,6 +39,7 @@ function SignUp() {
     }
 
     async function getUserAccessAndRefreshToken() {
+        setIsLoading(true);
 
         const response = await fetch(buildAPIUrl("v1/users/token/"), {
             method: "POST",
@@ -71,7 +73,8 @@ function SignUp() {
                 confirmPassword: "",
                 password: ""
             });
-            setTokensToLocalStorage(res.access, res.refresh)
+            setTokensToLocalStorage(res.access, res.refresh);
+            setIsLoading(false);
 
             window.location.assign('/');
         }
@@ -83,6 +86,7 @@ function SignUp() {
             event.preventDefault();
 
             validateField();
+            setIsLoading(true);
 
             const response = await fetch(buildAPIUrl("v1/users/"), {
                 method: "POST",
@@ -116,6 +120,7 @@ function SignUp() {
 
         } catch (error) {
             setIsError(true);
+            setIsLoading(false);
             setError(error.message);
 
         }

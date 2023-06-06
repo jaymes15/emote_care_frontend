@@ -12,6 +12,8 @@ import buildAPIUrl from "../../services/UrlBuilder";
 function ChatRoom() {
     let param = useParams();
     const [userToken, setUserToken] = useState(getAccessToken());
+    const [socketMessage, setsocketMessage] = useState("");
+    const [isSocketReady, setIsSocketReady] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState("");
@@ -78,6 +80,7 @@ function ChatRoom() {
 
         websocket.onopen = () => {
             console.log('connected');
+            setIsSocketReady(true)
         }
 
         websocket.onmessage = (event) => {
@@ -98,6 +101,8 @@ function ChatRoom() {
         websocket.onerror = (event) => {
             console.log("Something went wrong");
             console.log(event)
+            setsocketMessage(`${event}`)
+            
         }
 
         return () => {
@@ -203,7 +208,7 @@ function ChatRoom() {
 
 
 
-                <form onSubmit={sendMessageHandler} className="chat-textfield ">
+                {isSocketReady &&<form onSubmit={sendMessageHandler} className="chat-textfield ">
                     <input
                         type="text"
                         className="chat-input"
@@ -214,7 +219,8 @@ function ChatRoom() {
                         required />
                     <button className="chat-send-button">Send</button>
 
-                </form>
+                </form>}
+                {!isSocketReady && <h3>Connecting...</h3>}
 
 
 

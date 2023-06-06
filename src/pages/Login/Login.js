@@ -10,6 +10,7 @@ function Login() {
         username: "",
         password: ""
     });
+    const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState("");
     const usernameField = "username"
@@ -31,7 +32,7 @@ function Login() {
     }
 
     async function getUserAccessAndRefreshToken() {
-
+        setIsLoading(true);
         const response = await fetch(buildAPIUrl("v1/users/token/"), {
             method: "POST",
             headers: {
@@ -61,7 +62,8 @@ function Login() {
                 username: "",
                 password: ""
             });
-            setTokensToLocalStorage(res.access, res.refresh)
+            setTokensToLocalStorage(res.access, res.refresh);
+            setIsLoading(false);
             
             window.location.assign('/');
         }
@@ -76,6 +78,7 @@ function Login() {
 
         } catch (error) {
             setIsError(true);
+            setIsLoading(false);
             setError(error.message);
 
         }
